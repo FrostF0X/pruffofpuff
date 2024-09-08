@@ -13,7 +13,7 @@ const Upload: NextPage = () => {
     return (
         <div>
             <Camera ref={camera} errorMessages={'sorry'}/>
-            <button onClick={click}>Take photo</button>
+            <button style={{'position': 'fixed', bottom: '20%', 'left': '50%', 'transform': 'translateX(-50%)', width: '50%'}} onClick={click}>Take photo</button>
             {image ? <img src={image} alt='Taken photo'/> : null}
         </div>
     );
