@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@types/jimp": "^0.2.28",
+    "@u4/opencv4nodejs": "^7.1.1",
     "amqplib": "^0.10.4",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
