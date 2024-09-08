@@ -8,13 +8,11 @@ export function createApp(broker: BrokerAsPromised) {
 
   const resultRepo = AppDataSource.getRepository(ComputeValueJobResult);
 
-  app.use(express.json({limit: '50mb'}));
+  app.use(express.json({limit: '5mb'}));
 
   app.post("/add", async (req, res) => {
     try {
       const input = req.body.input;
-
-      console.log(req.body);
 
       const newJob = resultRepo.create({
         input: input
