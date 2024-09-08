@@ -1,0 +1,15 @@
+# IDEs
+.idea/
+.vscode/
+
+# NodeJS
+node_modules/
+
+# Typescript
+dist/
+
+# Golem Build Ouputs
+*.gvmi*
+*.metadata.json
+
+.env

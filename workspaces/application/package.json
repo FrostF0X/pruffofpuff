@@ -1,0 +1,37 @@
+{
+  "name": "decentralized-computer",
+  "version": "1.0.0",
+  "description": "Example application that can be run with Docker Compose, containerized and then moved to Golem Network",
+  "scripts": {
+    "prebuild": "rimraf dist/",
+    "build": "tsc -b",
+    "start:api": "node dist/api",
+    "start:worker": "node dist/worker",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "db:schema:sync": "typeorm schema:sync -d dist/shared/db/data-source.js",
+    "start": "ts-node src/index.ts",
+    "format": "prettier -w ."
+  },
+  "keywords": [],
+  "author": "Grzegorz Godlewski <grzegorz.godlewski@golem.network>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.16.1",
+    "@types/rascal": "^10.0.9",
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
+    "ts-node": "10.9.1",
+    "tsx": "^4.17.0",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.4",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.4.0",
+    "rascal": "^20.1.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "0.3.20"
+  }
+}
