@@ -1,14 +1,13 @@
 import "dotenv/config";
-import { makeRascalConfig } from "../shared/config";
-import { BrokerAsPromised as Broker } from "rascal";
-import { AppDataSource } from "../shared/db/data-source";
-import { ComputeValueJobResult } from "../shared/db/entity/ComputeValueJobResult";
-import os from "node:os";
+import {makeRascalConfig} from "../shared/config";
+import {BrokerAsPromised as Broker} from "rascal";
+import {AppDataSource} from "../shared/db/data-source";
+import {ComputeValueJobResult} from "../shared/db/entity/ComputeValueJobResult";
 import cluster from "node:cluster";
 import fs from "fs";
 import path from "path";
 import cv from "@u4/opencv4nodejs";
-import Jimp from "jimp";
+import {Jimp} from "jimp";
 
 // Configuration for image pattern paths (hardcoded)
 const patternConfig = {
@@ -53,10 +52,8 @@ async function base64ToImage(base64Str: string, outputFilePath: string) {
 
 // Function to load the image using Jimp and convert to OpenCV Mat
 async function loadImageToMat(imagePath: string) {
-  // @ts-ignore
   const image = await Jimp.read(imagePath);
-  // @ts-ignore
-  const buffer = await image.getBufferAsync(Jimp.MIME_PNG);
+  const buffer = await image.getBuffer("image/png");
   const pngMat = cv.imdecode(buffer); // Decode buffer into OpenCV Mat
   return pngMat;
 }
@@ -145,19 +142,17 @@ async function findTemplates(inputImagePath: string, scaleRange = [0.5, 2], angl
         const jobArgs = JSON.parse(content.toString());
         console.log("JOB Args", jobArgs);
 
-        // Decode base64 input image to file
-        const inputImagePath = path.resolve(__dirname, `../images/job_${jobArgs.id}_input.png`);
-        await base64ToImage(jobArgs.input, inputImagePath);
-
-        // Perform image matching and get matched pattern names
-        const matchedPatterns = await findTemplates(inputImagePath);
-
         const job = await resultRepo.findOneByOrFail({
           id: jobArgs.id,
         });
 
+        // Decode base64 input image to file
+        const inputImagePath = path.resolve(__dirname, `../job_${jobArgs.id}_input.png`);
+        await base64ToImage(job.input, inputImagePath);
+
+        // Perform image matching and get matched pattern names
         // Save the array of matched pattern names or "No match found" if none were found
-        job.result = matchedPatterns;
+        job.result = await findTemplates(inputImagePath);
 
         await resultRepo.save(job);
 
