@@ -27,7 +27,7 @@ const Home: NextPage = () => {
                     </div>
                     <div className="flex justify-center items-center space-x-2 flex-col sm:flex-row">
                         <p className="my-2 font-medium">Pruffer:</p>
-                        {address ? <Link href={"/upload"}>UPLOAD IMAGE</Link> : 'NOT PRUFFER '}
+                        {connectedAddress ? <Link href={"/upload"}>UPLOAD IMAGE</Link> : 'NOT PRUFFER '}
 
                     </div>
 
