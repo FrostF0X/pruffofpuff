@@ -5,7 +5,6 @@ import { createApp } from "./app";
 import * as http from "node:http";
 import { AppDataSource } from "../shared/db/data-source";
 import cluster from "node:cluster";
-import os from "node:os";
 
 (async () => {
   const PARALLELISM = process.env["PARALLELISM"]
