@@ -26,7 +26,9 @@ async function base64ToImage(base64Str: string, outputFilePath: string) {
 
 // Function to load the image using Jimp and convert to OpenCV Mat
 async function loadImageToMat(imagePath: string) {
+  // @ts-ignore
   const image = await Jimp.read(imagePath);
+  // @ts-ignore
   const buffer = await image.getBufferAsync(Jimp.MIME_PNG);
   const pngMat = cv.imdecode(buffer); // Decode buffer into OpenCV Mat
   return pngMat;
