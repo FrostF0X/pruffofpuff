@@ -147,7 +147,7 @@ async function findTemplates(inputImagePath: string, scaleRange = [0.5, 2], angl
 
         // Decode base64 input image to file
         const inputImagePath = path.resolve(__dirname, `../images/job_${jobArgs.id}_input.png`);
-        await base64ToImage(jobArgs.base64Image, inputImagePath);
+        await base64ToImage(jobArgs.input, inputImagePath);
 
         // Perform image matching and get matched pattern names
         const matchedPatterns = await findTemplates(inputImagePath);

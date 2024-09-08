@@ -14,6 +14,8 @@ export function createApp(broker: BrokerAsPromised) {
     try {
       const input = req.body.input;
 
+      console.log(req.body);
+
       const newJob = resultRepo.create({
         input: input
       });
