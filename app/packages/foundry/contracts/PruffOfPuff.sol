@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract PruffOfPuff is ERC721, Ownable {
+contract PruffOfPuff is ERC721URIStorage, Ownable {
     uint256 private _tokenIds;
 
     // Mapping to keep track of pruffer addresses
@@ -33,32 +33,16 @@ contract PruffOfPuff is ERC721, Ownable {
         pruffers[_pruffer] = false;
     }
 
-    // Function to mint a new token, can only be called by pruffers
-    function mint(address to, string memory tokenURI) external {
+    // Function to mint a new token, can only be called by pruffers, mints to msg.sender
+    function mint(string memory tokenURI) external {
         require(pruffers[msg.sender], "Not a pruffer, minting not allowed.");
 
         _tokenIds++;
         uint256 newTokenId = _tokenIds;
 
-        _mint(to, newTokenId);
-        _setTokenURI(newTokenId, tokenURI);
+        _mint(msg.sender, newTokenId); // Mint to the address of the caller (executor)
+        _setTokenURI(newTokenId, tokenURI); // Set the token's IPFS link
 
-        emit TokenMinted(to, newTokenId, tokenURI);
-    }
-
-    // Function to set the token URI (IPFS link)
-    function _setTokenURI(uint256 tokenId, string memory _tokenURI) internal virtual {
-        require(_exists(tokenId), "Token ID does not exist.");
-        // Optional: You can store the tokenURI using a mapping or another method.
-    }
-
-    function isPruffer(address _address) external view returns (bool) {
-        return pruffers[_address];
-    }
-
-    // Optional: Override to return a token URI stored on IPFS
-    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
-        // Implement your logic to retrieve the IPFS link
-        return super.tokenURI(tokenId);
+        emit TokenMinted(msg.sender, newTokenId, tokenURI);
     }
 }
