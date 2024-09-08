@@ -23,11 +23,12 @@ export function createApp(broker: BrokerAsPromised) {
       const job = await resultRepo.save(newJob);
 
       await broker.publish(
-        "add-two-numbers",
+        "determine-puffs",
         JSON.stringify({
           id: job.id,
         }),
       );
+
 
       return res.status(201).json({
         success: true,

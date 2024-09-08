@@ -15,7 +15,7 @@ contract PruffOfPuff is ERC721URIStorage, Ownable {
     // Event for minting a new token
     event TokenMinted(address indexed to, uint256 indexed tokenId, string tokenURI);
 
-    constructor() ERC721("PruffOfPuff", "POF") {
+    constructor() ERC721("PruffOfPuff", "POF") Ownable(msg.sender) {
         pruffers[msg.sender] = true; // Automatically add the contract owner as a pruffer
         emit PrufferAdded(msg.sender); // Emit an event indicating the owner was added as a pruffer
     }
@@ -31,6 +31,10 @@ contract PruffOfPuff is ERC721URIStorage, Ownable {
     function removePruffer(address _pruffer) external onlyOwner {
         require(pruffers[_pruffer], "Address is not a pruffer.");
         pruffers[_pruffer] = false;
+    }
+
+    function isPruffer(address _address) public view returns (bool) {
+        return pruffers[_address];
     }
 
     // Function to mint a new token, can only be called by pruffers, mints to msg.sender

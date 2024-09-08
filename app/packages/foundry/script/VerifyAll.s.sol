@@ -3,7 +3,8 @@ pragma solidity ^0.8.19;
 
 import "forge-std/Script.sol";
 import "forge-std/Vm.sol";
-import "bytes/BytesLib.sol";
+import "./BytesLib.sol";
+
 
 /**
  * @dev Temp Vm implementation

@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
 import "../contracts/PruffOfPuff.sol";
@@ -15,27 +15,24 @@ contract DeployScript is ScaffoldETHDeploy {
                 "You don't have a deployer account. Make sure you have set DEPLOYER_PRIVATE_KEY in .env or use `yarn generate` to generate a new random account"
             );
         }
+
         vm.startBroadcast(deployerPrivateKey);
 
-        PruffOfPuff  = new PruffOfPuff(
-            vm.addr(deployerPrivateKey)
-        );
+        // Declare a variable to hold the contract instance
+        PruffOfPuff pruffOfPuffInstance = new PruffOfPuff();
+
+        // Log the address of the deployed contract
         console.logString(
             string.concat(
-                " deployed at: ",
-                vm.toString(address())
+                "PruffOfPuff deployed at: ",
+                vm.toString(address(pruffOfPuffInstance)) // Convert the instance to its address
             )
         );
 
+        pruffOfPuffInstance.addPruffer(address(0xAe74fE44cc21d7fE604572ed4b898303957Dde83));
         vm.stopBroadcast();
 
-        
-
-        /**
-         * This function generates the file containing the contracts Abi definitions.
-         * These definitions are used to derive the types needed in the custom scaffold-eth hooks, for example.
-         * This function should be called last.
-         */
+        // Call exportDeployments to save the ABI, etc.
         exportDeployments();
     }
 

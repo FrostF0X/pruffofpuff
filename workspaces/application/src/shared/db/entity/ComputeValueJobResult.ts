@@ -5,24 +5,24 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-
 @Entity()
 export class ComputeValueJobResult {
   @PrimaryGeneratedColumn()
   id: number;
 
+  // Store the base64 PNG image as a string
   @Column({
-    type: "integer",
+    type: "text", // Use "text" to store a potentially large base64 string
   })
-  argA: number;
+  input: string;
 
+  // Store the result as an array of strings
   @Column({
-    type: "integer",
+    type: "text", // Use "text" for string array
+    array: true,
+    nullable: true, // Allow null in case the result isn't available yet
   })
-  argB: number;
-
-  @Column({ type: "integer", nullable: true })
-  result: number | null;
+  result: string[] | null;
 
   @CreateDateColumn()
   createdAt: Date;

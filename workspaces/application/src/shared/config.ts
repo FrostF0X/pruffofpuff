@@ -17,7 +17,7 @@ export function makeRascalConfig(
         },
         queues: ["compute-value-job"],
         publications: {
-          "add-two-numbers": {
+          "determine-puffs": {
             queue: "compute-value-job",
           },
         },
