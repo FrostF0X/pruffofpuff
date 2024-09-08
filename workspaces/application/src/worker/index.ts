@@ -7,7 +7,7 @@ import os from "node:os";
 import cluster from "node:cluster";
 import fs from "fs";
 import path from "path";
-import cv from "opencv4nodejs";
+import cv from "@u4/opencv4nodejs";
 import Jimp from "jimp";
 
 // Configuration for image pattern paths (hardcoded)
