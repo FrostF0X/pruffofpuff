@@ -10,7 +10,7 @@ import os from "node:os";
 (async () => {
   const PARALLELISM = process.env["PARALLELISM"]
     ? parseInt(process.env["PARALLELISM"])
-    : os.availableParallelism();
+    : 1;
 
   if (cluster.isPrimary) {
     console.log("Starting primary", process.pid);

@@ -75,8 +75,7 @@ async function findTemplates(inputImagePath: string, scaleRange = [0.5, 2], angl
 
 (async () => {
   const PARALLELISM = process.env["PARALLELISM"]
-      ? parseInt(process.env["PARALLELISM"])
-      : os.availableParallelism();
+      ? parseInt(process.env["PARALLELISM"]) : 1;
 
   if (cluster.isPrimary) {
     console.log("Starting primary", process.pid);
