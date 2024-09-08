@@ -1,18 +1,6 @@
-FROM node:lts-slim
+FROM urielch/opencv-nodejs
 
 WORKDIR /usr/src/app
-
-RUN apt-get update && \
-    apt-get install -y \
-    build-essential \
-    cmake \
-    libopencv-dev \
-    python3 \
-    python3-pip \
-    python3-opencv \
-    wget \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
 
 ENV OPENCV4NODEJS_DISABLE_AUTOBUILD=1
 
