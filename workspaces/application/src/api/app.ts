@@ -12,12 +12,10 @@ export function createApp(broker: BrokerAsPromised) {
 
   app.post("/add", async (req, res) => {
     try {
-      const argA = parseInt(req.body.a);
-      const argB = parseInt(req.body.b);
+      const input = req.body.input;
 
       const newJob = resultRepo.create({
-        argA,
-        argB,
+        input: input
       });
 
       const job = await resultRepo.save(newJob);

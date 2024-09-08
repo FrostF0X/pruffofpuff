@@ -14,6 +14,8 @@ RUN apt-get update && \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
+ENV OPENCV4NODEJS_DISABLE_AUTOBUILD=1
+
 COPY package* /usr/src/app
 RUN npm install
 

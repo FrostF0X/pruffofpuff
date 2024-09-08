@@ -26,9 +26,12 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@types/jimp": "^0.2.28",
     "amqplib": "^0.10.4",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "jimp": "^1.4.0",
+    "opencv4nodejs": "^5.6.0",
     "pg": "^8.4.0",
     "rascal": "^20.1.0",
     "reflect-metadata": "^0.1.13",

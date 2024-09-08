@@ -1,12 +1,11 @@
 "use client";
 
 import type {NextPage} from "next";
-import {useAccount} from "wagmi";
 import {useRef, useState} from "react";
 import {Camera} from "react-camera-pro";
 
 const Upload: NextPage = () => {
-    const {address: connectedAddress} = useAccount();
+    // const {address: connectedAddress} = useAccount();
     const camera = useRef(null);
     const [image, setImage] = useState(null);
     // @ts-ignore
